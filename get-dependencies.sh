@@ -21,7 +21,7 @@ case "$ARCH" in # they use X64 and ARM64 for the zip links
 	aarch64) zip_arch=Linux-ARM64;;
 esac
 ZIP_LINK=$(wget -qO- https://api.github.com/repos/Rainchus/Donkey-Kong-64-Recompiled/releases \
-      | sed 's/[()",{} ]/\n/g' | grep -o -m 1 "https.*DK64Recompiled.*$zip_arch.zip")
+      | sed 's/[()",{} ]/\n/g' | grep -o -m 1 "https.*DK64Recompiled.*$zip_arch.*\.zip")
 echo "$ZIP_LINK" | awk -F'/' '{gsub(/^v/, "", $(NF-1)); print $(NF-1); exit}' > ~/version
 wget --retry-connrefused --tries=30 "$ZIP_LINK" -O /tmp/app.zip
 
